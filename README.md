@@ -5,9 +5,9 @@ Instructions: [Testes unitários](https://www.notion.so/Desafio-01-Testes-unit-r
 ## Base URL
 http://localhost:3333
 ## Tests
-Test Suites: 6 total
+Test Suites: 12 total
 
-Tests: 17 total
+Tests: 36 total
 
 ## Project commands
 ### Prepare project  

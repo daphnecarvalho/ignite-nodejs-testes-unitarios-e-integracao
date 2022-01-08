@@ -1,4 +1,4 @@
-import '../utils/config'
+import './index'
 
 export default {
   jwt: {
