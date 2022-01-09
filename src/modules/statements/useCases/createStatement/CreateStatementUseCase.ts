@@ -15,8 +15,8 @@ export class CreateStatementUseCase {
     private statementsRepository: IStatementsRepository
   ) {}
 
-  async execute({ user_id, type, amount, description, sender_id }: ICreateStatementDTO) {
-    if(type === 'transfer' && sender_id && user_id === sender_id) {
+  async execute({ user_id, type, amount, description, sender_id: receiver_id }: ICreateStatementDTO) {
+    if(type === 'transfer' && receiver_id && user_id === receiver_id) {
       throw new CreateStatementError.InvalidOperation();
     }
     
@@ -37,17 +37,17 @@ export class CreateStatementUseCase {
     // Save statement for user who received funds
     if(type === 'transfer') {
       await this.statementsRepository.create({
-        user_id,
+        user_id: String(receiver_id),
         type,
         amount,
         description,
-        sender_id
+        sender_id: user_id,
       });
     }
 
     // Save statement for user who transfered funds
     const statementOperation = await this.statementsRepository.create({
-      user_id: String(sender_id),
+      user_id,
       type,
       amount,
       description,
